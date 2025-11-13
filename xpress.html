@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Person Class Hierarchy Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+                Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        code {
+            background-color: #e9ecef;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Class Inheritance Demo</h1>
+        <p>Check the browser's developer console (F12) to see the output.</p>
+    </div>
+
+    <script>
+        // --- 1. Base Class: Person ---
+        // This class defines the common properties and methods for any person.
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+
+            // A general method to introduce the person.
+            introduce() {
+                return `My name is ${this.name} and I am ${this.age} years old.`;
+            }
+        }
+
+        // --- 2. Subclass: Student ---
+        // The Student class inherits from Person and adds specific properties and methods.
+        class Student extends Person {
+            constructor(name, age, course) {
+                // 'super()' calls the constructor of the parent class (Person)
+                // to initialize the inherited properties 'name' and 'age'.
+                super(name, age);
+                
+                // This is a new property specific to the Student class.
+                this.course = course;
+            }
+
+            // Method Overriding: This 'introduce' method provides a more specific
+            // introduction for a Student, overriding the one from the Person class.
+            introduce() {
+                // We can still access the parent's method using 'super' if needed,
+                // for example: super.introduce() + ` I am studying ${this.course}.`
+                return `My name is ${this.name} and I am ${this.age} years old. I am studying ${this.course}.`;
+            }
+        }
+
+        // --- 3. Subclass: Teacher ---
+        // The Teacher class also inherits from Person but has its own unique properties.
+        class Teacher extends Person {
+            constructor(name, age, subject) {
+                // Call the parent constructor.
+                super(name, age);
+
+                // Add a new property specific to the Teacher class.
+                this.subject = subject;
+            }
+
+            // Method Overriding: A specific introduction for a Teacher.
+            introduce() {
+                return `My name is ${this.name} and I am ${this.age} years old. I teach ${this.subject}.`;
+            }
+        }
+
+
+        // --- 4. Demonstration ---
+        // Create instances of the subclasses to see them in action.
+
+        console.log("--- Creating Instances ---");
+
+        // Create a new Student instance.
+        const student1 = new Student('Alice', 21, 'Computer Science');
+
+        // Create a new Teacher instance.
+        const teacher1 = new Teacher('Mr. Smith', 45, 'Mathematics');
+
+        console.log("\n--- Calling Methods ---");
+
+        // Call the 'introduce' method on the student instance.
+        // This will execute the overridden method in the Student class.
+        console.log("Student's Introduction:");
+        console.log(student1.introduce()); // Output: My name is Alice and I am 21 years old. I am studying Computer Science.
+
+        // Call the 'introduce' method on the teacher instance.
+        // This will execute the overridden method in the Teacher class.
+        console.log("\nTeacher's Introduction:");
+        console.log(teacher1.introduce()); // Output: My name is Mr. Smith and I am 45 years old. I teach Mathematics.
+        
+    </script>
+</body>
+</html>
